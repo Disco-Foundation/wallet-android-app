@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.DiscoWallet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/background</item>
+        <item name="colorPrimaryVariant">@color/background</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/neon_pink</item>
+        <item name="colorSecondaryVariant">@color/neon_pink</item>
+        <item name="colorOnSecondary">@color/background</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

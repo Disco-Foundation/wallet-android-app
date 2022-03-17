@@ -1,0 +1,76 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#00FFFFFF">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="280dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="10dp"
+        app:strokeWidth="0.5dp"
+        app:strokeColor="#A0FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="0dp">
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:minHeight="10dp"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/neon_pink"
+                android:progress="0"
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/popup_btn"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="0dp"
+                android:fontFamily="@font/beon"
+                android:text="CONTINUE"
+                android:textColor="@color/neon_pink"
+                tools:ignore="TextContrastCheck" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

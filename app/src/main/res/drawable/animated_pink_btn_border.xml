@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="313dp"
+            android:height="65dp"
+            android:viewportWidth="313"
+            android:viewportHeight="65">
+            <group
+                android:name="btn_stroke"
+                android:pivotX="12"
+                android:pivotY="12">
+                <path
+                    android:name="background"
+                    android:pathData="M13 3H300C305.523 3 310 7.47715 310 13V52C310 57.5228 305.523 62 300 62H13C7.47715 62 3 57.5228 3 52V13C3 7.47715 7.47715 3 13 3Z"
+                    android:strokeWidth="3"
+                    android:strokeLineCap="round"
+                    android:strokeLineJoin="round"
+                    android:strokeColor="#8CFF5EF9"/>
+                <path
+                    android:name="border"
+                    android:pathData="M13 3H300C305.523 3 310 7.47715 310 13V52C310 57.5228 305.523 62 300 62H13C7.47715 62 3 57.5228 3 52V13C3 7.47715 7.47715 3 13 3Z"
+                    android:strokeWidth="3"
+                    android:strokeLineCap="round"
+                    android:strokeLineJoin="round"
+                    android:strokeColor="@color/neon_pink"
+                    android:trimPathEnd="0"
+                    />
+
+                <path
+                    android:name="border_shadow"
+                    android:pathData="M13 3H300C305.523 3 310 7.47715 310 13V52C310 57.5228 305.523 62 300 62H13C7.47715 62 3 57.5228 3 52V13C3 7.47715 7.47715 3 13 3Z"
+                    android:strokeWidth="9"
+                    android:trimPathEnd="0"
+                    android:strokeColor="#33FF5EF9">
+                </path>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="border">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="1000"
+                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:propertyName="trimPathEnd"
+                android:valueFrom="0"
+                android:valueTo="1"/>
+        </aapt:attr>
+
+    </target>
+    <target
+        android:name="border_shadow">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="1000"
+                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:propertyName="trimPathEnd"
+                android:valueFrom="0"
+                android:valueTo="1"/>
+        </aapt:attr>
+
+    </target>
+
+</animated-vector>

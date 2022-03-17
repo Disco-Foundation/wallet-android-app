@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".fragments.PayFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/logo_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="-100dp"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/ic_launcher_foreground" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-30dp">
+
+
+            <TextView
+                android:id="@+id/disco_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/beon"
+                android:text="@string/disco"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:id="@+id/app_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/wallet"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/info_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:padding="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="10dp" />
+
+        <disco.foundation.discowallet.components.CustomButton
+            android:id="@+id/action_button"
+            style="@style/PrimaryButton"
+            app:color="@color/neon_pink"
+            app:buttonText="@string/camera_qr"
+            app:backgroundVector="@drawable/animated_pink_btn_border"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

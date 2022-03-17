@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.solana.solana" >
+
+    <application>
+        <activity
+            android:name="com.foundation.discoprotocol.activities.ViewInfoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_payment" />
+    </application>
+</manifest>
