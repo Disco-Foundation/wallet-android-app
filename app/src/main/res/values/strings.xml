@@ -11,4 +11,7 @@
 
     <!-- errors -->
     <string name="error_creating_transaction">Error creating transaction</string>
+
+    <string name="key_copied">Private key copied successfully</string>
+    <string name="address_copied">Address copied successfully</string>
 </resources>

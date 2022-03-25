@@ -13,5 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
         <item name="android:navigationBarColor" tools:targetApi="l">@color/background</item>
         <!-- Customize your theme here. -->
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:itemTextAppearance">@style/itemTextStyle.AppTheme</item>
+    </style>
+
+    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">#010620</item>
     </style>
 </resources>

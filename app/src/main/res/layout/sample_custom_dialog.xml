@@ -29,7 +29,7 @@
             <TextView
                 android:id="@+id/message"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="8dp"
@@ -56,18 +56,40 @@
                 android:visibility="gone" />
 
 
-            <Button
-                android:id="@+id/popup_btn"
-                style="@style/Widget.AppCompat.Button"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="0dp"
-                android:fontFamily="@font/beon"
-                android:text="CONTINUE"
-                android:textColor="@color/neon_pink"
-                tools:ignore="TextContrastCheck" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/popup_btn_cancel"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/beon"
+                    android:text="CANCEL"
+                    android:textColor="@color/neon_pink"
+                    android:visibility="gone"
+                    tools:ignore="TextContrastCheck" />
+
+                <Button
+                    android:id="@+id/popup_btn"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/beon"
+                    android:text="CONTINUE"
+                    android:textColor="@color/neon_pink"
+                    tools:ignore="TextContrastCheck" />
+            </LinearLayout>
 
         </LinearLayout>
 

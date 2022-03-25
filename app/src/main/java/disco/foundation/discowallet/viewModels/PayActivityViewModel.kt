@@ -6,15 +6,11 @@ import androidx.lifecycle.viewModelScope
 import disco.foundation.discowallet.api.models.RequestResult
 import disco.foundation.discowallet.api.models.RequestStatus
 import disco.foundation.discowallet.utils.solana.createNewWallet
-import disco.foundation.discowallet.utils.solana.models.CheckinTransaction
-import disco.foundation.discowallet.utils.solana.models.RechargeTransaction
 import disco.foundation.discowallet.utils.solana.parsers.parseCheckinTransaction
 import disco.foundation.discowallet.utils.solana.parsers.parseRechargeTransaction
 import disco.foundation.discowallet.utils.solana.signCheckinTransaction
 import disco.foundation.discowallet.utils.solana.signRechargeTransaction
 import kotlinx.coroutines.launch
-
-
 
 class PayActivityViewModel: ViewModel(){
 

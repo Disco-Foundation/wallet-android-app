@@ -12,9 +12,6 @@ import androidx.annotation.RequiresApi
 import disco.foundation.discowallet.R
 import disco.foundation.discowallet.databinding.SampleCustomButtonBinding
 
-/**
- * TODO: document your custom view class.
- */
 @RequiresApi(Build.VERSION_CODES.M)
 @SuppressLint("ResourceAsColor")
 class CustomButton@JvmOverloads constructor(

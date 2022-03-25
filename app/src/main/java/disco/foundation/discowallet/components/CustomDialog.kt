@@ -44,7 +44,9 @@ class CustomDialog(context: Context) : Dialog(context) {
         binding.message.setTextColor(Color.WHITE)
     }
 
-    fun showPopup(message: String, showButton: Boolean, buttonText: String? = null, action: (() -> Unit)? = null){
+    fun showPopup(message: String, showButton: Boolean, buttonText: String? = null,
+                  action: (() -> Unit)? = null, showCancelButton: Boolean? = null,
+                  cancelAction: (() -> Unit)? = null){
         super.show()
         val desiredColor = ContextCompat.getColor(context, R.color.neon_pink)
         binding.progressBar.setIndeterminateTintCompat(desiredColor)
@@ -52,18 +54,30 @@ class CustomDialog(context: Context) : Dialog(context) {
         messageText = message
         if (showButton){
             initButton(buttonText!!, action!!)
+            if(showCancelButton == true && cancelAction != null){
+                setupCancelButton(cancelAction)
+            }
         } else {
             showProgressBar()
         }
     }
 
-    fun update(message: String, showButton: Boolean, buttonText: String? = null, action: (() -> Unit)? = null){
+    fun update(message: String, showButton: Boolean, buttonText: String? = null,
+               action: (() -> Unit)? = null, showCancelButton: Boolean? = null,
+               cancelAction: (() -> Unit)? = null){
         // Popup text message
-        messageText = message
-        if (showButton){
-            initButton(buttonText!!, action!!)
+        if(isShowing) {
+            messageText = message
+            if (showButton && buttonText != null && action != null) {
+                initButton(buttonText, action)
+                if (showCancelButton == true && cancelAction != null) {
+                    setupCancelButton(cancelAction)
+                }
+            } else {
+                showProgressBar()
+            }
         } else {
-            showProgressBar()
+            showPopup(message,showButton,buttonText,action,showCancelButton, cancelAction)
         }
     }
 
@@ -88,6 +102,10 @@ class CustomDialog(context: Context) : Dialog(context) {
         showButton()
         setupButtonAction(action)
         setupButtonText(text)
+    }
+
+    private fun setupCancelButton(cb: () -> Unit){
+        binding.popupBtnCancel.setOnClickListener { cb() }
     }
 
 }

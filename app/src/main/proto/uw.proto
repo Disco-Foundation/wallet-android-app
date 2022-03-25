@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "disco.foundation.discowallet";
+option java_multiple_files = true;
+
+message ProtoUW {
+  repeated int32 secret = 1 [packed=true];
+}
