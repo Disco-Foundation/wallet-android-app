@@ -1,17 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Disco        Wallet</string>
-    <string name="pay">APPROVE</string>
+    <string name="app_name">Disco Wallet</string>
     <string name="disco">DISCO</string>
     <string name="wallet">Wallet</string>
-    <string name="camera_qr" tools:ignore="ExtraTranslation">Read Qr</string>
+
+    <!-- Main Activity strings -->
+    <string name="camera_qr" tools:ignore="ExtraTranslation">READ QR</string>
+    <string name="export">Export</string>
+    <string name="loading">Loading...</string>
+    <string name="ok">Ok</string>
+    <string name="exportable">exportable</string>
+
+    <!-- Pay Activity strings -->
+    <string name="pay">APPROVE</string>
+
+
+    <!-- Read QR Camera Activity strings -->
     <string name="center_qr">Center the QR Code inside the frame</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-    <!-- errors -->
+    <!-- errors messages -->
+    <string name="error">Error</string>
     <string name="error_creating_transaction">Error creating transaction</string>
 
+    <!-- success messages -->
     <string name="key_copied">Private key copied successfully</string>
     <string name="address_copied">Address copied successfully</string>
+    <string name="wallet_created">Wallet created successfully, please store your secret key somewhere save</string>
 </resources>

@@ -18,64 +18,79 @@ import disco.foundation.discowallet.components.CustomDialog
 import disco.foundation.discowallet.components.WalletDetailsDialog
 import disco.foundation.discowallet.data.ProtoDataStoreManager
 import disco.foundation.discowallet.databinding.ActivityMainBinding
-import disco.foundation.discowallet.utils.solana.createNewWallet
 import disco.foundation.discowallet.viewModels.MainActivityViewModel
-import okio.ByteString.Companion.toByteString
 
+/**
+ * Main Activity
+ */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var dialog: CustomDialog
-    private lateinit var walletDetails: WalletDetailsDialog
-    private lateinit var viewModel: MainActivityViewModel
+    /* late init variables to manage the activity view */
+    private lateinit var binding: ActivityMainBinding       /* main activity view */
+    private lateinit var dialog: CustomDialog               /* progress dialog */
+    private lateinit var walletDetails: WalletDetailsDialog /* wallet info dialog */
+    private lateinit var viewModel: MainActivityViewModel   /* main activity view model */
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /* init activity view */
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // init view model
+
+        /* init view model */
         viewModel = ViewModelProvider(
             this,
             MainActivityViewModel.FACTORY(ProtoDataStoreManager(this))
         )[MainActivityViewModel::class.java]
-
-        // setup UI
-        setupUI()
-        // setup observables
-        subscribeToData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupUI()          /* setup activity view */
+        subscribeToData()  /* setup activity data observables */
+    }
+
+    /**
+    *  Setup all the elements of the activity view
+    **/
     private fun setupUI() {
+        setupButtons()  /* setup buttons */
+        setupDialogs()  /* setup dialogs */
+        setupMenu()     /* setup right menu */
+    }
+
+    private fun setupButtons(){
+        binding.actionButton.setupAnimation { goToReadQR() }
+        binding.actionButton.buttonText = getString(R.string.camera_qr)
+    }
+
+    private fun setupDialogs(){
         dialog = CustomDialog(this)
         walletDetails = WalletDetailsDialog(this)
         walletDetails.setOwnerActivity(this)
-        binding.actionButton.setupAnimation { goToReadQR() }
-        binding.actionButton.buttonText = getString(R.string.camera_qr)
-        setupMenu()
     }
 
     private fun goToReadQR() {
-        val intent = Intent(this, ReadQrCamera::class.java)
-        startActivity(intent)
+        if(viewModel.walletExist()) {
+            val intent = Intent(this, ReadQrCamera::class.java)
+            startActivity(intent)
+        } else { showError() }
     }
 
     @SuppressLint("NewApi")
     private fun setupMenu() {
-        val showPopUp = PopupMenu(
-            this,
-            binding.menuBtn
-        )
+        val showPopUp = PopupMenu(this, binding.menuBtn)
+
         showPopUp.inflate(R.menu.settings_menu)
         showPopUp.setForceShowIcon(true)
         showPopUp.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.item1 -> {
+                    viewModel.showDetails = true
                     viewModel.getUW()
                 }
-                R.id.item2 -> {
-                    viewModel.saveUW()
-                }
+                R.id.item2 -> { viewModel.saveUW() }
             }
             false
         }
@@ -87,44 +102,55 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeToData() {
         viewModel.loading.observe(this) {
             when (it) {
-                RequestStatus.LOADING -> {
-                    dialog.showPopup("Loading...", false)
-                }
-                RequestStatus.SUCCESS -> {
-                    if (viewModel.pKey == null) {
-                        dialog.update(
-                            "Wallet created successfully, " +
-                                    "please store your secret key somewhere save",
-                            true, "Export", ::exportKey)
-                    } else {
-                        dismiss()
-                        if (viewModel.pKey !== null && viewModel.sKey != null) {
-                            walletDetails.showDetails(viewModel.pKey!!, viewModel.sKey!!)
-                        }
-                    }
-                }
-                else -> {
-                    dialog.update(
-                        viewModel.errorMsg ?: "ERROR",
-                        true, "Ok", action = ::dismiss)
-                }
+                RequestStatus.LOADING -> { showLoading() }
+                RequestStatus.SUCCESS -> { showWalletDetails()  }
+                else -> { showError() }
             }
         }
+
+        viewModel.saving.observe(this) {
+            when (it) {
+                RequestStatus.LOADING -> { showLoading() }
+                RequestStatus.SUCCESS -> { showWalletCreated() }
+                else -> { showError() }
+            }
+        }
+
+        viewModel.getUW()
     }
 
-    private fun dismiss(){
-        dialog.dismiss()
-    }
-
+    private fun dismiss(){ if(dialog.isShowing) { dialog.dismiss() } }
 
     private fun exportKey(){
         dismiss()
-        val clipboard =
-            getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip: ClipData = ClipData.newPlainText("exportable", viewModel.sKey)
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip: ClipData = ClipData.newPlainText(getString(R.string.exportable), viewModel.sKey)
+
         clipboard.setPrimaryClip(clip)
         Toast.makeText(this, getString(R.string.key_copied), Toast.LENGTH_SHORT)
             .show()
+    }
+
+    private fun showError(){
+        dialog.update(
+            viewModel.errorMsg ?: getString(R.string.error),
+            true, getString(R.string.ok), action = ::dismiss)
+    }
+
+    private fun showLoading(){
+        dialog.showPopup(getString(R.string.loading), false)
+    }
+
+    private fun showWalletCreated(){
+        dialog.update(getString(R.string.wallet_created),
+            true, getString(R.string.export), ::exportKey)
+    }
+
+    private fun showWalletDetails(){
+        dismiss()
+        if (viewModel.pKey !== null && viewModel.sKey != null && viewModel.showDetails) {
+            walletDetails.showDetails(viewModel.pKey!!, viewModel.sKey!!)
+        }
     }
 
 }

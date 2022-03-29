@@ -40,6 +40,7 @@ suspend fun createCheckinTransaction(body: CreateCheckinDataBody, payer: Account
         )
         tx.addInstruction(rechargeInstruction)
         solana.api.sendTransaction(transaction = tx, listOf(payer), null) { res ->
+            println("---------------------PAYER-------------------------")
             println("El payer es ${payer.publicKey.toBase58()} - The result is --> $res")
             result = if (res.isSuccess) {
                 RequestResult.Success(res.toString())
@@ -71,7 +72,7 @@ suspend fun signCheckinTransaction(
         eventId = qrData.inst.eId,
         payer = payer.publicKey.toBase58()
     )
-    println("EL BODY $body")
+    println("----------------------EL BODY $body")
     return createCheckinTransaction(body, payer, qrData.ref)
 }
 

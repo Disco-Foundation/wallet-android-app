@@ -11,10 +11,12 @@ import disco.foundation.discowallet.R
 import disco.foundation.discowallet.activities.PayActivity
 import disco.foundation.discowallet.api.models.RequestStatus
 import disco.foundation.discowallet.components.CustomDialog
+import disco.foundation.discowallet.data.ProtoDataStoreManager
 import disco.foundation.discowallet.databinding.FragmentPayFragmentBinding
 import disco.foundation.discowallet.utils.solana.models.CheckinTransaction
 import disco.foundation.discowallet.utils.solana.parsers.parseBasicData
 import disco.foundation.discowallet.utils.solana.parsers.parseCheckinTransaction
+import disco.foundation.discowallet.viewModels.MainActivityViewModel
 import disco.foundation.discowallet.viewModels.PayActivityViewModel
 
 class PayFragment : Fragment() {
@@ -27,13 +29,10 @@ class PayFragment : Fragment() {
 
         fun newInstance(name: String): PayFragment {
             val fragment = PayFragment()
-
             val bundle = Bundle().apply {
                 putString(ARG_DATA, name)
             }
-
             fragment.arguments = bundle
-
             return fragment
         }
     }
@@ -50,7 +49,10 @@ class PayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[PayActivityViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            PayActivityViewModel.FACTORY(ProtoDataStoreManager(requireContext()))
+        )[PayActivityViewModel::class.java]
         dialog = CustomDialog(requireContext())
         subscribeToData()
         setupUI()
@@ -83,22 +85,26 @@ class PayFragment : Fragment() {
                 RequestStatus.SUCCESS -> dialog.update(
                     "Transaction send, it will confirmed in a few moments",
                     true,
-                    "Continue"
-                ) {
-                    dialog.dismiss()
-                    (activity as PayActivity).goToMainActivity()
-                }
+                    "Continue", action = ::goToMain
+                )
                 RequestStatus.ERROR -> dialog.update(
                     "Something went wrong",
                     true,
-                    "Try again"
-                ){
-                    dialog.dismiss()
-                    activity?.finish()
-                }
+                    "Try again", action = ::finalize
+                )
                 else -> { dialog.dismiss() }
             }
         }
+    }
+
+    private fun finalize(){
+        dialog.dismiss()
+        activity?.finish()
+    }
+
+    private fun goToMain(){
+        dialog.dismiss()
+        (activity as PayActivity).goToMainActivity()
     }
 
     private fun action(action: String, rawQrData: String){
