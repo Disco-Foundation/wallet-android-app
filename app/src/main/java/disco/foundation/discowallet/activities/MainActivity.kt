@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showError(){
         dialog.update(
-            viewModel.errorMsg ?: getString(R.string.error),
+            getString(viewModel.errorMsg ?: R.string.something_went_wrong),
             true, getString(R.string.ok), action = ::dismiss)
     }
 

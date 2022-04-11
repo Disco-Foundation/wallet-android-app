@@ -17,7 +17,7 @@ class Splash : AppCompatActivity() {
 
     private fun exitSplashScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, disco.foundation.discowallet.activities.MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }, TIME_SPLASH_SCREEN)

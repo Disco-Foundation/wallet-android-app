@@ -12,6 +12,9 @@
 
     <!-- Pay Activity strings -->
     <string name="pay">APPROVE</string>
+    <string name="sending">Sending transaction</string>
+    <string name="continue_btn">Continue</string>
+    <string name="try_again">Try again</string>
 
 
     <!-- Read QR Camera Activity strings -->
@@ -21,9 +24,14 @@
     <!-- errors messages -->
     <string name="error">Error</string>
     <string name="error_creating_transaction">Error creating transaction</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="error_creating_wallet">"Something went wrong creating the new wallet"</string>
+    <string name="no_wallet_yet">"There's no wallet yet, please create a new one"</string>
 
     <!-- success messages -->
     <string name="key_copied">Private key copied successfully</string>
     <string name="address_copied">Address copied successfully</string>
     <string name="wallet_created">Wallet created successfully, please store your secret key somewhere save</string>
+    <string name="transaction_sent">Transaction sent, will be confirmed in a few moments</string>
+
 </resources>

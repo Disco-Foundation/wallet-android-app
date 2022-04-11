@@ -13,10 +13,7 @@ import disco.foundation.discowallet.api.models.RequestStatus
 import disco.foundation.discowallet.components.CustomDialog
 import disco.foundation.discowallet.data.ProtoDataStoreManager
 import disco.foundation.discowallet.databinding.FragmentPayFragmentBinding
-import disco.foundation.discowallet.utils.solana.models.CheckinTransaction
 import disco.foundation.discowallet.utils.solana.parsers.parseBasicData
-import disco.foundation.discowallet.utils.solana.parsers.parseCheckinTransaction
-import disco.foundation.discowallet.viewModels.MainActivityViewModel
 import disco.foundation.discowallet.viewModels.PayActivityViewModel
 
 class PayFragment : Fragment() {
@@ -80,17 +77,17 @@ class PayFragment : Fragment() {
         viewModel.loading.observe(viewLifecycleOwner){
             when(it){
                 RequestStatus.LOADING -> dialog.showPopup(
-                    "Sending transaction", false
+                    getString(R.string.sending), false
                 )
                 RequestStatus.SUCCESS -> dialog.update(
-                    "Transaction send, it will confirmed in a few moments",
+                    getString(R.string.transaction_sent),
                     true,
-                    "Continue", action = ::goToMain
+                    getString(R.string.continue_btn), action = ::goToMain
                 )
                 RequestStatus.ERROR -> dialog.update(
-                    "Something went wrong",
+                    getString(R.string.something_went_wrong),
                     true,
-                    "Try again", action = ::finalize
+                    getString(R.string.try_again), action = ::finalize
                 )
                 else -> { dialog.dismiss() }
             }
